@@ -1,0 +1,55 @@
+﻿@*Strong Typed*@
+@model MonedaViewModel
+@{
+	ViewData["Title"] = "Home";
+	var message = (string)ViewData["message"];
+}
+
+<div class="row">
+	<h1 style="text-align:center;">Calculadora de divisas.</h1>
+</div>
+
+<div class="h-100 d-flex align-items-center justify-content-center">
+	<form method="post" asp-controller="Conversion" asp-action="Index">
+		<table class="table table-hover table-sm">
+			<thead>
+				<tr>
+					<th scope="col">Cantidad</th>
+					<th scope="col">De</th>
+					<th scope="col">a</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<input asp-for="cantidad" class="form-control" type="number" min="1" required="required" />
+					</td>
+					<td>
+						<select asp-for="moneda1" class="form-select" name="moneda1" required>
+							<option value="Dolar">Dolar</option>
+							<option value="Peso">Peso</option>
+							<option value="Euro">Euro</option>
+						</select>
+					</td>
+					<td>
+						<select asp-for="moneda2" class="form-select" name="moneda2" required>
+							<option value="Dolar">Dolar</option>
+							<option value="Peso">Peso</option>
+							<option value="Euro">Euro</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align:center";>
+						<button type="submit" class="btn">Convertir</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+
+@if (message != null)
+{
+	<h1 style="text-align:center;">@Model.cantidad @Model.moneda1 equivale a @message @Model.moneda2</h1>
+}
